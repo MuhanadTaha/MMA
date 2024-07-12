@@ -1,0 +1,102 @@
+﻿
+@model Course
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<section class="container pt-5 mt-5">
+    <h2 class="text-Dark">Create Course</h2>
+    <hr />
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
+        @*nctype="multipart/form-data" باسخدمها لما بدي أرفع صور بأي فورم*@
+        <div class="border px-3 pb-3">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="from-control row mt-3">
+                <div class="col-md-2">
+                    <label asp-for="CourseName" class="col-form-label"></label>
+                </div>
+                <div class="col-md-7">
+                    <input asp-for="CourseName" class="form-control" />
+                    <span class="text-danger" asp-validation-for="CourseName"></span> @*To Required Field*@
+                </div>
+            </div>
+
+            <div class="from-control row mt-3">
+                <div class="col-md-2">
+                    <label asp-for="Topic" class="col-form-label"></label>
+                </div>
+                <div class="col-md-7">
+                    <input asp-for="Topic" class="form-control" />
+                    <span class="text-danger" asp-validation-for="Topic"></span> @*To Required Field*@
+                </div>
+            </div>
+
+            <div class="from-group row mt-3">
+                <div class="col-md-2">
+                    <label asp-for="Description" class="col-form-label"></label>
+                </div>
+                <div class="col-md-7">
+                    <textarea asp-for="Description" rows="9" class="form-control"></textarea>
+                    <span class="text-danger" asp-validation-for="Description"></span> @*To Required Field*@
+                </div>
+            </div>
+
+
+            <div class="from-group row mt-md-3">
+                <div class="col-md-2">
+                    <label asp-for="Price" class="col-form-label"></label>
+                </div>
+                <div class="col-md-7">
+                    <input asp-for="Price" class="form-control" />
+                    <span class="text-danger" asp-validation-for="Price"></span> @*To Required Field*@
+                </div>
+            </div>
+
+
+            <div class="from-group row mt-3">
+                <div class="col-md-2">
+                    <label asp-for="Image" class="col-form-label"></label>
+                </div>
+                <div class="col-md-7">
+                    <input type="file" multiple asp-for="Image" class="form-control" />
+                </div>
+            </div>
+
+            <div class="from-group row mt-md-3">
+                <div class="col-md-2">
+                    <label asp-for="TeacherName" class="col-form-label"></label>
+                </div>
+                <div class="col-md-7">
+                    <input asp-for="TeacherName" class="form-control" />
+                    <span class="text-danger" asp-validation-for="TeacherName"></span> @*To Required Field*@
+                </div>
+            </div>
+
+     
+
+        
+
+            <div class="from-group row" style="padding-top:20px;">
+                <div class="col-md-7 offset-md-2">
+                    <partial name="_CreateAndBackListButtonPartial" />
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+
+@section scripts{
+
+    <script>
+        //عشان يكون في ايديتور بالايريا
+           tinymce.init(
+               {
+                   selector:'textarea',
+                   plugins:'lists',
+                   menubar:'file edit format'
+               }
+           );
+    </script>
+
+}

@@ -1,0 +1,137 @@
+﻿
+@model IEnumerable<ContactUs>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<div class="container pt-5 mt-5">
+    <div class="border p-2">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="text-dark">Messages List</h2>
+            </div>
+        </div>
+
+
+        <div>
+            @if (Model.Count() == 0)
+            {
+                <p class="text-danger">No Message ...</p>
+            }
+            
+            else
+            {
+                <div class="table-responsive fixed-table-body">
+                    <table class="table table-striped border">
+                        <tr >
+                            <th>
+                                @Html.DisplayNameFor(m => m.Name)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(m => m.Email)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(m => m.Subject)
+                            </th>
+                            
+                            <th>
+
+                            </th>
+                        </tr>
+
+                        @foreach (var item in Model)
+
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(m => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => item.Subject)
+                                </td>
+                              
+                              
+                                   
+                             
+                               
+                                <td>
+                                    <button type="button" class="btn btn-success showDetails" data-toggle="modal" data-target="#detailsModal" data-name="@item.Name" data-email="@item.Email" data-subject="@item.Subject" data-description="@item.Description">
+                                        <i class="fas fa-list-alt"></i> Details
+                                    </button>
+                                </td>
+
+                           
+                            </tr>
+                        }
+                    </table>
+               
+
+                </div>
+               
+            }
+        </div>
+   </div>
+</div>
+
+<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog"  role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailsModalLabel">Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Place your details content here -->
+                <p>Subject: <span id="detailSubject"></span></p>
+                <hr />
+               
+                <p>Description:</p>
+                <p id="detailDescription"></p>
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('.showDetails').on('click', function () {
+                var name = $(this).data('name');
+                var email = $(this).data('email');
+                var subject = $(this).data('subject');
+                var description = $(this).data('description'); // أفضل إضافة معلومات الوصف هنا
+
+                $('#detailName').text(name);
+                $('#detailEmail').text(email);
+                $('#detailSubject').text(subject);
+                $('#detailDescription').text(description);
+            });
+        });
+    </script>
+
+
+
+
+}
+
+
+
+
+
+
